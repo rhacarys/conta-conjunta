@@ -11,14 +11,14 @@ import useCookies from "./hooks/useCookies";
 import { useEffect } from "react";
 
 const App = () => {
-  const [config, setConfig] = useCookies("config");
+  const [config, setConfig, reset] = useCookies("config");
   const [, setNathan] = useCookies("nathan");
   const [, setJeftally] = useCookies("jeftally");
   const [, setCleiton] = useCookies("cleiton");
 
   useEffect(() => {
     if (!config) {
-      setConfig({ currency: "BRL" });
+      setConfig({ currency: "BRL", history: [] });
       setNathan({
         id: "nathan",
         name: "Nathaniel",
@@ -58,7 +58,14 @@ const App = () => {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Conta Conjunta
             </Typography>
-            <IconButton size="large" color="inherit">
+            <IconButton
+              size="large"
+              color="inherit"
+              onClick={() => {
+                confirm("Tem certeza que deseja apagar todos os dados?") &&
+                  reset();
+              }}
+            >
               <Sync />
             </IconButton>
           </Toolbar>

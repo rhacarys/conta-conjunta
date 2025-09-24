@@ -17,7 +17,7 @@ const DashboardPage = () => {
       </Box>
       <Box display="flex" gap={4} flexDirection="column">
         {people.map((person) => (
-          <Paper elevation={3} style={{ padding: 16 }}>
+          <Paper key={person.id} elevation={3} style={{ padding: 16 }}>
             <Box key={person.id}>
               <Typography variant="h6">{person.name}</Typography>
               <Box mt={2} mb={2} display="flex" justifyContent="space-between">

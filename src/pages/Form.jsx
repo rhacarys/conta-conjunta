@@ -27,6 +27,7 @@ const FormPage = () => {
 
   const [paying, setPaying] = useState("");
   const [amount, setAmount] = useState("");
+  const [description, setDescription] = useState("");
   const [involved, setInvolved] = useState({
     nathan: false,
     jeftally: false,
@@ -92,6 +93,22 @@ const FormPage = () => {
       setCleiton({ ...cleiton, balanceArs: cleitonArs });
     }
 
+    setConfig({
+      ...config,
+      history: [
+        ...config.history,
+        {
+          id: Date.now(),
+          paying,
+          amount: amt,
+          involved,
+          currency: config.currency,
+          description,
+          date: new Date().toLocaleString("PT-br"),
+        },
+      ],
+    });
+
     setPaying("");
     setAmount("");
     setInvolved({
@@ -148,6 +165,13 @@ const FormPage = () => {
               </Select>
             </FormControl>
           </Box>
+
+          <TextField
+            label="Descrição (opcional)"
+            variant="outlined"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
 
           <FormGroup>
             {people.map((person) => (
