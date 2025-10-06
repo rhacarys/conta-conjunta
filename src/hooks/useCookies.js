@@ -23,9 +23,9 @@ const useCookies = (cookieName, initialValue = '') => {
   const setCookie = useCallback((newValue, options = {}) => {
     const {
       path = '/',
-      maxAge,
+      maxAge = 60 * 60 * 24 * 7,
       domain,
-      secure = false,
+      secure = true,
       sameSite = 'Lax'
     } = options;
 
@@ -49,5 +49,6 @@ const useCookies = (cookieName, initialValue = '') => {
 
   return [value, setCookie, removeCookie];
 };
+
 
 export default useCookies;
